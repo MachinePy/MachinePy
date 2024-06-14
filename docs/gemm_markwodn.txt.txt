@@ -1,0 +1,41 @@
+
+Here is an exmaple:
+GEMM (GEneral Maxtrix Multiplication)
+
+$$
+\begin{bmatrix}
+c_{00}^{n} & c_{01}^{n} \\
+c_{10}^{n} & c_{11}^{n}
+\end{bmatrix}=
+\begin{bmatrix}
+a_{00}^{n-1} & a_{01}^{n-1} \\
+a_{10}^{n-1} & a_{11}^{n-1}
+\end{bmatrix}\times
+\begin{bmatrix}
+b_{00}^{n-1} & b_{01}^{n-1} \\
+b_{10}^{n-1} & b_{11}^{n-1}
+\end{bmatrix}+
+\begin{bmatrix}
+c_{00}^{n-1} & c_{01}^{n-1} \\
+c_{10}^{n-1} & c_{11}^{n-1}
+\end{bmatrix}
+$$
+
+The Register Update Hypergraph containts 12 nodes and 4 edges.
+
+- The Nodes are: \{${a_{00},a_{01},a_{10},a_{11},b_{00},b_{01},b_{10},b_{11},c_{00},c_{01},c_{10},c_{11}}$\}
+
+- The edges are 
+\{e0,e1,e2,e3\}=<br>
+  $\{(\{a_{00},a_{01},b_{00},b_{10},c_{00}\},c_{00}),$<br>
+  $(\{a_{00},a_{01},b_{01},b_{11},c_{01}\},c_{01}),$<br>
+  $(\{a_{10},a_{11},b_{00},b_{10},c_{10}\},c_{10}),$<br>
+  $(\{a_{10},a_{11},b_{01},b_{11},c_{11}\},c_{11})\}$<br>
+
+
+
+Edge{e0,e1,e2,e3} represents scientific computation logic:
+  - $e_0 \leftrightarrow c_{00}^{n}=a_{00}^{n-1}b_{00}^{n-1}+a_{01}^{n-1}b_{10}^{n-1}+c_{00}^{n-1}$
+  - $e_1 \leftrightarrow c_{01}^{n}=a_{00}^{n-1}b_{01}^{n-1}+a_{01}^{n-1}b_{11}^{n-1}+c_{01}^{n-1}$
+  - $e_2 \leftrightarrow c_{10}^{n}=a_{10}^{n-1}b_{00}^{n-1}+a_{11}^{n-1}b_{10}^{n-1}+c_{10}^{n-1}$
+  - $e_3 \leftrightarrow c_{11}^{n}=a_{10}^{n-1}b_{01}^{n-1}+a_{11}^{n-1}b_{11}^{n-1}+c_{11}^{n-1}$
