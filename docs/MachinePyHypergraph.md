@@ -183,5 +183,22 @@ Steps to Design a Scientific Computation Pipeline in RTL:
 ![e_g_gemm](gemm.png)
 
 
+## Node & Edge
+This is a summarization of the utilization of nodes and edges of a hypergraph in HDL coding. Nodes and edges are concepts in a hypergraph. As discussed, nodes have different meanings in Register Update Hypergrah (RUH) and Register Moment Hyperaph (RMH). However, edges' meanings are very similar for either RUH or RMH.
+
+Edges are the function that calculates the updated (new) value of the destination nodes based on the source nodes. In other words, one edge corresponds to one piece of pure logic code (sub-module, function, process, etc) that will not take the clock into consideration. Pure logic will calculate new values based on old values. This is exactly what a function in mathematics does. Although the pure logic calculation will sometimes output more than one result, the results must be considered as a whole since pure logic just works as a function in mathematics.
+
+Nodes, as mentioned, refer to the register content in RUH but refer to the register update enable control in RMH. It should be clarified that one node may refer to a bundle of registers for design convenience in RUH. However, in RMH, for the same bundle of registers, more than one node may be used to control the update enable of the different registers in the bundle. **It is suggested that the bundle of registers considered as one node in RUH but corresponding to multiple nodes in RMH must be divided into multiple nodes in RUH.**
 
 
+- RUH
+  - Node:
+    - One node refers to one bundle of registers.
+  - Edge:
+    - One edge refers to the pure logic that calculates the new values of the registers based on the old values.
+
+- RMH
+  - Node:
+    - One node refers to one enable control of some registers.
+  - Edge:
+    - One edge refers to the pure logic that calcualte the exact moment to update the controled registers.
