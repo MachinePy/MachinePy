@@ -1,7 +1,7 @@
 # MachinePy Hypergraph Convention
 When using @MachinePy for HDL coding, the MachienPy Hypergraph convention should be followed. 
 
-The main content of the MachienPy Hypergraph convention is to standardize code writing with reference to a directed hypergraph, so that the final code can present the structure of a directed graph. The advantage of this is that it can make HDL easy to maintain, highly readable, and highly abstract. The final digital circuit structure is basically consistent with the directed hypergraph structure presented in the code.
+The main content of the MachienPy Hypergraph convention is to standardize code writing with reference to a directed hypergraph so that the final code can present the structure of a directed hypergraph. The advantage of this is that it can make HDL easy to maintain, highly readable, and highly abstract. The final digital circuit structure is basically consistent with the directed hypergraph structure presented in the code.
 
 ## Design Abstraction Level
 
@@ -19,26 +19,26 @@ In digital circuit design, for different levels of abstraction, there are severa
 These components and units form the building blocks of RTL designs and are essential for implementing complex digital systems efficiently.
 
 ## Hypergraph Abstraction
-Hypergraph abstraction follows the RTL(Register Transfer Level) abtraction. Any abstraction level that is higher than RTL will build on hypergraph abstraction.
+Hypergraph abstraction follows the RTL(Register Transfer Level) abstraction. Any abstraction level that is higher than RTL will build on hypergraph abstraction.
 
 ### Register Transfer
-Hypergraph abstraction follows the RTL(Register Transfer Level) abtraction. Only directed hypergraphs are used in the MachinePy convention. 
+Hypergraph abstraction follows the RTL(Register Transfer Level) abstraction. Only directed hypergraphs are used in the MachinePy convention. 
 
-In mathematics, a hypergraph is a generalization of a graph in which an edge can join any number of vertices. Formally, a directed hypergraph is a pair (𝑋,𝐸), where 𝑋 is a set of elements called nodes,vertices, points, or elements and 𝐸 is a set of pairs of subsets of 𝑋. Each of these pairs (𝐷,𝐶)∈𝐸 is called an edge or hyperedge; the vertex subset 𝐷 is known as its tail or domain, and 𝐶 as its head or codomain. For example:
+In mathematics, a hypergraph is a generalization of a graph in which an edge can join any number of vertices. Formally, a directed hypergraph is a pair (𝑋,𝐸), where 𝑋 is a set of elements called nodes, vertices, points, or elements and 𝐸 is a set of pairs of subsets of 𝑋. Each of these pairs (𝐷,𝐶)∈𝐸 is called an edge or hyperedge; the vertex subset 𝐷 is known as its tail or domain, and 𝐶 as its head or codomain. For example:
 
 ![e_g_wikipedia](e_g_directed_hypergraph.png)
 *An exmaple of a directed hypergraph, with X={1,2,3,4,5,6} and E={a1,a2,a3,a4,a5}={({1},{2}),({2},{3}),({3},{1}),({2,3},{4,5}),({3,5},{6})}*
 
 MachinePy Hypergraph conventions that 
-- Register Update Hypergraph: using a directed hyergraph with nodes being registers (conetent) and edges being register transter update function/logics. 
+- Register Update Hypergraph: using a directed hypergraph with nodes being registers (content) and edges being register transfer update function/logics. 
 - Register Moment Hypergraph: using a directed hypergraph with nodes being registers update validation (the update enable, or whether/when the registers should be updated) signal and edges being function/logics that calculate  whether/when the registers should be updated. In other words, edges represent the function/logic that will calculate the proper moment to update the registers.
 
 
 Here is a more specific example:
 ![e_g_4_node](e_g_4_node_hypergraph.drawio.png)
-*A 4-node hypergraph example. (a)Register Update Hypergraph.(b)Register Moment Hypergraph. Although both (a) and (b) contain 3 edges, the represented meanings are different.In (a), Edge a1,a2,a3 means the register content update process. In (b), Edge a1,a2, and a3 represent the process of calculating the exact monment to update the corresponding registers.*
+*A 4-node hypergraph example. (a)Register Update Hypergraph.(b)Register Moment Hypergraph. Although both (a) and (b) contain 3 edges, the represented meanings are different.In (a), Edge a1,a2,a3 means the register content update process. In (b), Edge a1,a2, and a3 represent the process of calculating the exact moment to update the corresponding registers.*
 
-In order to further demostrate the hypergraph convention, Verilog code about the above exmaple is shown here:
+In order to further demonstrate the hypergraph convention, Verilog code about the above example is shown here:
 
 ```verilog
 module exmpale_4_node(
