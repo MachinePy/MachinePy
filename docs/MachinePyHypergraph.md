@@ -183,10 +183,27 @@ Steps to Design a Scientific Computation Pipeline in RTL:
 ![e_g_gemm](gemm.png)
 
 
+## Module I/O
+
+When considering the I/O of a certain module, it is not quite easy to apply MHC to standardize them. Usually, the input of a module is seen as a direct exterior wire connection and the output is registered within the module as registers. In fact, when designing a module, it is suggested that way. Besides, the input of a module should be as it comes from the registers outside the module. 
+- Tips:
+  - Usually, the input of a module is seen as a direct exterior wire connection and the output is registered within the module as registers.
+  - The input of a module should be as it comes from the registers outside the module. 
+
+Using the tips mentioned above should make it simple to apply the MHC to standardize module design and HDL coding.
+
+## Design Constrains
+
+The problems of multiple drivers are the main problems when conducting HDL coding.
+The contrains are:
+- One node should ONLY be in the codomain of ONE edge. The case that one node exists in the codomains of different edges MUST not exist.
+
+The constrains must be true for both Register Update Hypergraph and Register Moment Hypergraph.
+
 ## Node & Edge
 This is a summarization of the utilization of nodes and edges of a hypergraph in HDL coding. Nodes and edges are concepts in a hypergraph. As discussed, nodes have different meanings in Register Update Hypergrah (RUH) and Register Moment Hyperaph (RMH). However, edges' meanings are very similar for either RUH or RMH.
 
-Edges are the function that calculates the updated (new) value of the destination nodes based on the source nodes. In other words, one edge corresponds to one piece of pure logic code (sub-module, function, process, etc) that will not take the clock into consideration. Pure logic will calculate new values based on old values. This is exactly what a function in mathematics does. Although the pure logic calculation will sometimes output more than one result, the results must be considered as a whole since pure logic just works as a function in mathematics.
+Edges are the function that calculates the desired result based on the source nodes. In other words, one edge corresponds to one piece of pure logic code (sub-module, function, process, etc) that will not take the clock into consideration. Pure logic will only calculate values based on old values. This is exactly what a function in mathematics does. Although the pure logic calculation will sometimes output more than one result, the results must be considered as a whole since pure logic just works as a function in mathematics. **It also should be noticed that edges in RUH calcualtes the new values based on old values of registers, edges in RMU calculates the exact moment (when) to update the control registers.**
 
 Nodes, as mentioned, refer to the register content in RUH but refer to the register update enable control in RMH. It should be clarified that one node may refer to a bundle of registers for design convenience in RUH. However, in RMH, for the same bundle of registers, more than one node may be used to control the update enable of the different registers in the bundle. **It is suggested that the bundle of registers considered as one node in RUH but corresponding to multiple nodes in RMH must be divided into multiple nodes in RUH.**
 
