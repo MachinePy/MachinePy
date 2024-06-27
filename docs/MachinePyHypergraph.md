@@ -185,12 +185,14 @@ Steps to Design a Scientific Computation Pipeline in RTL:
 
 ## Module I/O
 
-When considering the I/O of a certain module, it is not quite easy to apply MHC to standardize them. Usually, the input of a module is seen as a direct exterior wire connection and the output is registered within the module as registers. In fact, when designing a module, it is suggested that way. Besides, the input of a module should be as it comes from the registers outside the module. 
+When considering the I/O of a certain module, it is not quite easy to apply MHC to standardize them. Usually, the input of a module is seen as a direct exterior wire connection and the output is registered within the module as registers. In fact, when designing a module, it is suggested that way.
 - Tips:
   - Usually, the input of a module is seen as a direct exterior wire connection and the output is registered within the module as registers.
   - The input of a module should be as it comes from the registers outside the module. 
 
 Using the tips mentioned above should make it simple to apply the MHC to standardize module design and HDL coding.
+
+In addition to using the tips mentioned above, MachinePy provides with the Hypergraph Convention another mechanism called **Auto-Interface** together with the Hypergraph Convention. All the nodes considered as registered in a module could be used directly by the parent module that instantiates the module. The nodes in the parent module could also be accessed by the current module. No matter whether it is in the parent module or in the current module, it is convenient to define the pure logic function to get the updated new values based on the nodes in both the current module and the parent module. After defining the pure logic function, whether for RUH or RMH, and after using all the nodes, the interface will be automatically generated for both Python language and the destination HDL, for example, SystemVerilog.
 
 ## Design Constrains
 

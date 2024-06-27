@@ -5,8 +5,8 @@
 - 💞️ I’m looking to collaborate on creating a new HDL "MachinePy" that will combine all the excellent HDL advantages,
 - 📫 How to reach me:
 - [EMAIL]machinepy@zohomail.com
-- [GIT]MachinePy
-- 😄 Pronouns: All In AI. AI helps people,
+- [GIT]@MachinePy
+- 😄 Pronouns: AI helps people.
 - ⚡ Fun fact: Chisel is good, HOWEVER, the generated code is literally trash.
 
 <!---
